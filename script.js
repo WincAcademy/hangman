@@ -48,6 +48,15 @@ const lose = function() {
   gameOver = true;
 };
 
+const resetWinLoseDisplay = function() {
+  document.querySelector(".win").style.display = "none";
+  document.querySelector(".lose").style.display = "none";
+};
+
+const setWordInLoseDisplay = function(word) {
+  document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
+};
+
 const updateTriesDisplay = function(tries) {
   document.querySelector(".lives span").innerHTML = maxTries - tries;
 };
@@ -103,13 +112,17 @@ const guessLetter = function() {
 
 const restartGame = function() {
   gameOver = false;
-  document.querySelector(".win").style.display = "none";
-  document.querySelector(".lose").style.display = "none";
+
+  resetWinLoseDisplay();
+
   emptyInput();
+
   word = selectWord(wordList).split("");
-  document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
+  setWordInLoseDisplay(word);
+
   tries = 0;
   updateTriesDisplay(tries);
+
   guessedLetters = [];
   updateWordDisplay(word, guessedLetters);
 };
