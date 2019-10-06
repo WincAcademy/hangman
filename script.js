@@ -118,15 +118,8 @@ const restartGame = function() {
   updateWordDisplay(word, guessedLetters);
 };
 
-const runGame = function() {
-  restartGame();
-  guessButton = document.querySelector(".guess");
-  guessButton.onclick = guessLetter;
-
-  restart = document.querySelector(".restart");
-  restart.onclick = restartGame;
-};
-
 document.addEventListener("DOMContentLoaded", function() {
-  runGame();
+  document.querySelector(".guess").onclick = guessLetter;
+  document.querySelector(".restart").onclick = restartGame;
+  restartGame();
 });
