@@ -28,11 +28,12 @@ const letterInWord = function(letter, word) {
 
 const wordGuessed = function(word, guessedLetters) {
   // remove all letters from word that are already guessed
+  // We can do this with a for loop to.
   let remaining = word.filter(function(letter) {
     // If the letter is guessed return false (we want to remove that then)
     return !guessedLetters.includes(letter);
   });
-  // If we have letters left the word is not yet Guessed
+  // If we have letters left the word is not yet guessed
   return remaining.length === 0;
 };
 
@@ -42,10 +43,12 @@ const emptyInput = function() {
 
 const win = function() {
   document.querySelector(".win").style.display = "block";
+  gameOver = true;
 };
 
 const lose = function() {
   document.querySelector(".lose").style.display = "block";
+  gameOver = true;
 };
 
 const updateTriesDisplay = function(tries) {
@@ -60,7 +63,8 @@ const updateGuessedLettersDisplay = function(word, guessedLetters) {
   document.querySelector(".guessed_letters").innerHTML = wrongLetters.join(" ");
 };
 
-const updateLettersDisplay = function(word, guessedLetters) {
+const updateWordDisplay = function(word, guessedLetters) {
+  // Build the string we want to display
   let display = word.map(function(letter) {
     if (guessedLetters.includes(letter)) {
       return letter;
@@ -68,8 +72,7 @@ const updateLettersDisplay = function(word, guessedLetters) {
       return "_";
     }
   });
-  display = display.join(" ");
-  document.querySelector(".the_word").innerHTML = display;
+  document.querySelector(".the_word").innerHTML = display.join(" ");
 };
 
 const guessLetter = function() {
@@ -91,15 +94,13 @@ const guessLetter = function() {
   }
 
   guessedLetters.push(letter);
-  updateLettersDisplay(word, guessedLetters);
+  updateWordDisplay(word, guessedLetters);
   updateGuessedLettersDisplay(word, guessedLetters);
 
-  if (wordGuessed(word, guessedLetters.concat(letter))) {
+  if (wordGuessed(word, guessedLetters)) {
     win();
-    gameOver = true;
   } else if (tries >= maxTries) {
     lose();
-    gameOver = true;
   }
 };
 
@@ -112,7 +113,7 @@ const restartGame = function() {
   document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
   tries = 0;
   guessedLetters = [];
-  updateLettersDisplay(word, []);
+  updateWordDisplay(word, guessedLetters);
 };
 
 const runGame = function() {
@@ -124,6 +125,6 @@ const runGame = function() {
   restart.onclick = restartGame;
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   runGame();
 });
