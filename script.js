@@ -16,6 +16,7 @@ const selectWord = function(list) {
   return list[index];
 };
 
+// Initialize global variables.
 // An array
 let word;
 let tries;
@@ -112,6 +113,7 @@ const restartGame = function() {
   word = selectWord(wordList).split("");
   document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
   tries = 0;
+  updateTriesDisplay(tries);
   guessedLetters = [];
   updateWordDisplay(word, guessedLetters);
 };
