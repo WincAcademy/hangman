@@ -23,10 +23,6 @@ let tries;
 let guessedLetters;
 let gameOver; // either won or lose
 
-const letterInWord = function(letter, word) {
-  return word.includes(letter);
-};
-
 const wordGuessed = function(word, guessedLetters) {
   // remove all letters from word that are already guessed
   // We can do this with a for loop to.
