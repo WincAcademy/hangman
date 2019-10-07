@@ -128,7 +128,7 @@ const restartGame = function() {
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-  document.querySelector(".guess").onclick = guessLetter;
-  document.querySelector(".restart").onclick = restartGame;
+  document.querySelector(".guess").addEventListener("click", guessLetter);
+  document.querySelector(".restart").addEventListener("click", restartGame);
   restartGame();
 });
